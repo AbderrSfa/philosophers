@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 14:58:47 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/17 15:01:54 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/17 16:08:46 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,40 @@ void	ft_putnbr_fd(int n, int fd)
 			i = (i / 10);
 		}
 	}
+}
+
+int	ft_isdigit(int c)
+{
+	if ((c > 47 && c < 58))
+		return (1);
+	else
+		return (0);
+}
+
+int	ft_atoi(const char *str)
+{
+	long	a;
+	int		b;
+	int		c;
+
+	a = 0;
+	b = 0;
+	c = 1;
+	while (((*str <= 13) && (*str >= 9)) || (*str == 32))
+		str++;
+	while ((*str == '+') || (*str == '-'))
+	{
+		if (*str == '-')
+			c = -1;
+		b++;
+		str++;
+	}
+	if (b > 1)
+		return (0);
+	while ((*str <= '9') && (*str >= '0'))
+	{
+		a = (*str - 48) + a * 10;
+		str++;
+	}
+	return (a * c);
 }

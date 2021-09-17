@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:09 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/17 15:21:01 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/17 16:22:27 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 void	sleeping(t_philo *philo)
 {
-	printf("Philosopher %d is sleeping.\n", philo->philo_number);
+	printf("Philosopher %d is sleeping.\n", philo->philo_id);
 	usleep(TIME_TO_SLEEP * 1000);
 }
 
 void	eating(t_philo *philo)
 {
-	printf("Philosopher %d is eating.\n", philo->philo_number);
+	philo->meal_number++;
+	printf("Philosopher %d is eating. Meal number: %d\n", philo->philo_id, philo->meal_number);
 	usleep(TIME_TO_EAT * 1000);
 }
 
 void	thinking(t_philo *philo)
 {
-	printf("Philosopher %d is thinking.\n", philo->philo_number);
+	printf("Philosopher %d is thinking.\n", philo->philo_id);
 }
 
 void	*routine(void *arg)
@@ -36,11 +37,19 @@ void	*routine(void *arg)
 	philo = arg;
 	while (1)
 	{
+		if (philo->meal_number == NUM_OF_MEALS && NUM_OF_MEALS != 0)
+			return (NULL);
 		eating(philo);
 		sleeping(philo);
 		thinking(philo);
 	}
 	return (NULL);
+}
+
+void	initialize_philo(t_philo *philo, int i)
+{
+	philo->philo_id = i + 1;
+	philo->meal_number = 0;
 }
 
 t_philo	*create_philos()
@@ -54,7 +63,7 @@ t_philo	*create_philos()
 		return (NULL);
 	while (i < NUM_OF_PHILOS)
 	{
-		philo[i].philo_number = i + 1;
+		initialize_philo(&philo[i], i);
 		i++;
 	}
 	return (philo);
@@ -79,12 +88,19 @@ pthread_t	*create_threads(t_philo *philo)
 	return (threads);
 }
 
-int		main()
+int		main(int argc, char **argv)
 {
 	t_philo		*philo;
 	pthread_t	*threads;
+	t_runtime	runtime;
 	int		i;
 
+	if (argc < 5 || argc > 6)
+	{
+		printf("Invalid number of arguments.");
+		return (0);
+	}
+	parsing(argc, argv, &runtime);
 	philo = create_philos();
 	threads = create_threads(philo);
 	i = 0;
@@ -94,5 +110,13 @@ int		main()
 			return (1);
 		i++;
 	}
+
+/* 		i = 0;
+		while (i < NUM_OF_PHILOS)
+		{
+			printf("Philo number: %d\n", philo[i].philo_id);
+			printf("Philo meal number: %d\n", philo[i].meal_number);
+			i++;
+		} */
 	return (0);
 }
