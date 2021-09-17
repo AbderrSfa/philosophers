@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/17 13:22:11 by asfaihi           #+#    #+#             */
+/*   Updated: 2021/09/17 15:13:35 by asfaihi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -40,14 +52,6 @@ void	sleeping(int philo_num)
 	gettimeofday(&timeStart, NULL);
 	printf("%ld %d is sleeping.\n", (timeStart.tv_sec - start_of_program), philo_num);
 	usleep(TIME_TO_SLEEP * 1000);
-}
-
-void	thinking(int philo_num)
-{
-	struct timeval	timeStart;
-
-
-	usleep(300 * 1000);
 }
 
 void	*routine(void *arg)
