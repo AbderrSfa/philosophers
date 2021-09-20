@@ -7,6 +7,8 @@ SRC = libft_functions.c \
 	program_parsing.c \
 	simulation.c
 
+HEADERFILE = philosophers.h
+
 FLAGS = -Wall -Wextra -Werror
 
 RED = \033[1;31m
@@ -29,7 +31,7 @@ $(NAME): $(OBJECT)
 	@gcc $(LIBNAME)  -o $(NAME)
 	@echo "\n$(GREEN)████████████████████████████████████████████ Done compiling █████████████████████████████████████████████$(RESET)"
 
-%.o:%.c
+%.o:%.c $(HEADERFILE)
 	gcc $(FLAGS) -c $<
 
 clean:
