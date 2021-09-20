@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 15:48:41 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/17 16:22:08 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/20 12:44:20 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,21 @@ int	is_arg_valid(char **argv)
 	return (0);
 }
 
-void	parsing(int argc, char **argv, t_runtime *runtime)
+void		init_runtime(t_runtime *runtime)
 {
+	runtime->philo_number = 0;
+	runtime->time_to_die = 0;
+	runtime->time_to_eat = 0;
+	runtime->time_to_sleep = 0;
+	runtime->times_eaten = 0;
+}
+
+t_runtime	*parsing(int argc, char **argv)
+{
+	t_runtime	*runtime;
+
+	runtime = malloc(sizeof(t_runtime));
+	init_runtime(runtime);
 	if (is_arg_valid(argv))
 		exit(1);
 	runtime->philo_number = ft_atoi(argv[1]);
@@ -45,4 +58,5 @@ void	parsing(int argc, char **argv, t_runtime *runtime)
 	runtime->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		runtime->times_eaten = ft_atoi(argv[5]);
+	return (runtime);
 }
