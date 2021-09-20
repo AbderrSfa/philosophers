@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:09 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/20 14:19:47 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/20 15:27:14 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,20 @@ pthread_t	*create_threads(t_philo *philo)
 		return (NULL);
 	while (i < philo->runtime->philo_number)
 	{
-		if (pthread_create(&threads[i], NULL, &routine, &philo[i]))
+		if (pthread_create(&threads[i], NULL, routine, &philo[i]))
 			return (NULL);
-		usleep(1500 * 1000);
+		usleep(1000 * 1000);
 		i++;
 	}
 	return (threads);
+}
+
+unsigned int	get_time()
+{
+	struct timeval	time_start;
+
+	gettimeofday(&time_start, NULL);
+	return ((time_start.tv_sec * 1000) + (time_start.tv_usec / 1000));
 }
 
 int		main(int argc, char **argv)
@@ -65,6 +73,7 @@ int		main(int argc, char **argv)
 	if (argc < 5 || argc > 6)
 		ft_put_error("Invalid number of arguments.");
 	runtime = parsing(argc, argv);
+	runtime->start_time = get_time();
 	philo = create_philos(runtime);
 	threads = create_threads(philo);
 	i = 0;
@@ -74,13 +83,5 @@ int		main(int argc, char **argv)
 			return (1);
 		i++;
 	}
-
-/* 		i = 0;
-		while (i < philo->runtime->philo_number)
-		{
-			printf("Philo number: %d\n", philo[i].philo_id);
-			printf("Philo meal number: %d\n", philo[i].meal_number);
-			i++;
-		} */
 	return (0);
 }
