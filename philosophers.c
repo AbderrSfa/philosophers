@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:09 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/20 12:57:38 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/20 14:19:47 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ int		main(int argc, char **argv)
 	int		i;
 
 	if (argc < 5 || argc > 6)
-	{
-		printf("Invalid number of arguments.");
-		return (0);
-	}
+		ft_put_error("Invalid number of arguments.");
 	runtime = parsing(argc, argv);
 	philo = create_philos(runtime);
 	threads = create_threads(philo);

@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:07 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/20 14:05:54 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/20 14:26:17 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@
 # include <unistd.h>
 # include <sys/time.h>
 
-# define NUM_OF_PHILOS 3
-# define TIME_TO_EAT 2000
-# define TIME_TO_SLEEP 2000
-# define NUM_OF_MEALS 3
+# define RESET	"\033[0m"
+# define RED	"\033[0;31m"
+# define GREEN	"\033[1;32m"
+# define YELLOW "\033[0;33m"
+# define BLUE "\033[0;34m"
 
 typedef	struct	s_runtime
 {
@@ -51,6 +52,7 @@ int			ft_atoi(const char *str);
 /* Parsing inputs */
 void		init_runtime(t_runtime *runtime);
 t_runtime	*parsing(int argc, char **argv);
+void		ft_put_error(char *error);
 
 /* Simultion */
 t_philo		*create_philos(t_runtime *runtime);
