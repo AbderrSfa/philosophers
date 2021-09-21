@@ -6,20 +6,16 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 14:58:47 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/20 14:27:48 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/21 10:49:38 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	ft_put_error(char *error)
+int	ft_put_error(char *error)
 {
-	ft_putstr_fd("ERROR: ", 1);
-	ft_putstr_fd(YELLOW, 1);
-	ft_putstr_fd(error, 1);
-	ft_putstr_fd("\n", 1);
-	ft_putstr_fd(RESET, 1);
-	exit(EXIT_FAILURE);
+	printf("ERROR:\033[0;33m %s\n\033[0m", error);
+	return (1);
 }
 
 void	ft_putchar_fd(char c, int fd)

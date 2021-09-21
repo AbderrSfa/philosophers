@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:09 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/20 15:27:14 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/21 10:54:17 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,9 @@ int		main(int argc, char **argv)
 	int		i;
 
 	if (argc < 5 || argc > 6)
-		ft_put_error("Invalid number of arguments.");
-	runtime = parsing(argc, argv);
+		return (ft_put_error("Invalid number of arguments."));
+	if (!(runtime = parsing(argc, argv)))
+		return (1);
 	runtime->start_time = get_time();
 	philo = create_philos(runtime);
 	threads = create_threads(philo);

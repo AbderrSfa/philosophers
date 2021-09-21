@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:07 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/20 15:25:29 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/21 10:52:56 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,11 @@ int				ft_isdigit(int c);
 int				ft_atoi(const char *str);
 
 /* Parsing inputs */
-void			init_runtime(t_runtime *runtime);
 t_runtime		*parsing(int argc, char **argv);
-void			ft_put_error(char *error);
+int				is_arg_valid(char **argv);
+void			init_runtime(t_runtime *runtime);
+int				validate_args(t_runtime *runtime);
+int				ft_put_error(char *error);
 
 /* Simultion */
 t_philo			*create_philos(t_runtime *runtime);
