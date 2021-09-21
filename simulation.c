@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 12:45:39 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/21 15:04:33 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/21 15:20:11 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	*routine(void *arg)
 	{
 		if ((get_time() - philo->time_of_last_meal) > philo->runtime->time_to_die)
 		{
-			printf("%d Philosopher %d starved.\n", get_time() - philo->runtime->start_time, philo->philo_id);
+			printf("%d Philosopher %d died.\n", get_time() - philo->runtime->start_time, philo->philo_id);
 			return (NULL);
 		}
 		eating(philo);
