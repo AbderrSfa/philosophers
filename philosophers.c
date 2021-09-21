@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:09 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/21 10:54:17 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/21 15:04:49 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	initialize_philo(t_philo *philo, t_runtime *runtime, int i)
 	philo->philo_id = i + 1;
 	philo->meal_number = 0;
 	philo->runtime = runtime;
+	philo->time_of_last_meal = 0;
 }
 
 t_philo	*create_philos(t_runtime *runtime)

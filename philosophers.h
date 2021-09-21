@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:07 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/21 10:52:56 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/21 15:03:28 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@
 typedef	struct		s_runtime
 {
 	int				philo_number;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
+	unsigned int	time_to_die;
+	unsigned int	time_to_eat;
+	unsigned int	time_to_sleep;
 	int				times_eaten;
 	unsigned int	start_time;
 }					t_runtime;
@@ -37,10 +37,11 @@ typedef	struct		s_runtime
 
 typedef struct		s_philo
 {
-	int				philo_id;
-	int				meal_number;
 	pthread_mutex_t	mutex;
 	t_runtime		*runtime;
+	int				philo_id;
+	int				meal_number;
+	unsigned int	time_of_last_meal;
 }					t_philo;
 
 /* Libft functions */
