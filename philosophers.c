@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:09 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/22 13:58:42 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/22 14:54:47 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	initialize_philo(t_philo *philo, t_runtime *runtime, int i)
 	philo->meal_number = 0;
 	philo->runtime = runtime;
 	philo->time_of_last_meal = 0;
+	philo->left_hand = i;
+	philo->right_hand = (i + 1) % philo->runtime->philo_number;
 }
 
 t_philo	*create_philos(t_runtime *runtime)
@@ -50,7 +52,7 @@ pthread_t	*create_threads(t_philo *philo)
 	{
 		if (pthread_create(&threads[i], NULL, routine, &philo[i]))
 			return (NULL);
-		usleep(1000 * 1000);
+		usleep(1000);
 		i++;
 	}
 	return (threads);
@@ -71,7 +73,8 @@ void	init_mutexes(t_philo *philo)
 	i = 0;
 	while (i < philo->runtime->philo_number)
 	{
-		pthread_mutex_init(&philo->runtime->forks[i], NULL);
+		if (pthread_mutex_init(&philo->runtime->forks[i], NULL))
+			exit(EXIT_FAILURE);
 		i++;
 	}
 }
@@ -101,8 +104,8 @@ int		main(int argc, char **argv)
 		return (1);
 	runtime->start_time = get_time();
 	philo = create_philos(runtime);
-	threads = create_threads(philo);
 	init_mutexes(philo);
+	threads = create_threads(philo);
 	i = 0;
 	while (i < philo->runtime->philo_number)
 	{

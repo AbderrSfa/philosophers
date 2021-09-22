@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 15:48:41 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/22 13:53:25 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/22 14:36:59 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,6 @@ t_runtime	*parsing(int argc, char **argv)
 	if (argc == 6)
 		runtime->times_eaten = ft_atoi(argv[5]);
 	if (validate_args(runtime))
-		return (NULL);
-	runtime->forks = malloc(sizeof(pthread_mutex_t) * runtime->philo_number);
-	if (runtime->forks == NULL)
 		return (NULL);
 	return (runtime);
 }

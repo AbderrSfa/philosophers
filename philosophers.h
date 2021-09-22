@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:07 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/22 13:48:14 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/22 14:48:16 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct		s_philo
 	int				philo_id;
 	int				meal_number;
 	unsigned int	time_of_last_meal;
+	int				left_hand;
+	int				right_hand;
 }					t_philo;
 
 /* Libft functions */
@@ -67,5 +69,6 @@ void			*routine(void *arg);
 void			eating(t_philo *philo);
 void			sleeping(t_philo *philo);
 void			thinking(t_philo *philo);
+void			print_status(int dead, char *status, t_philo *philo);
 
 #endif
