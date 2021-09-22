@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 15:48:41 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/21 10:55:54 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/22 12:48:59 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		init_runtime(t_runtime *runtime)
 	runtime->time_to_die = 0;
 	runtime->time_to_eat = 0;
 	runtime->time_to_sleep = 0;
-	runtime->times_eaten = 0;
+	runtime->times_eaten = -1;
 }
 
 int	validate_args(t_runtime *runtime)
