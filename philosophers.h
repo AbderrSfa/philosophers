@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:07 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/21 15:03:28 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/22 13:48:14 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 typedef	struct		s_runtime
 {
+	pthread_mutex_t	*forks;
 	int				philo_number;
 	unsigned int	time_to_die;
 	unsigned int	time_to_eat;
@@ -37,7 +38,6 @@ typedef	struct		s_runtime
 
 typedef struct		s_philo
 {
-	pthread_mutex_t	mutex;
 	t_runtime		*runtime;
 	int				philo_id;
 	int				meal_number;

@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:09 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/21 15:04:49 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/22 13:58:42 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,30 @@ unsigned int	get_time()
 	return ((time_start.tv_sec * 1000) + (time_start.tv_usec / 1000));
 }
 
+void	init_mutexes(t_philo *philo)
+{
+	int		i;
+
+	i = 0;
+	while (i < philo->runtime->philo_number)
+	{
+		pthread_mutex_init(&philo->runtime->forks[i], NULL);
+		i++;
+	}
+}
+
+void	destroy_mutexes(t_philo *philo)
+{
+	int		i;
+
+	i = 0;
+	while (i < philo->runtime->philo_number)
+	{
+		pthread_mutex_destroy(philo->runtime->forks);
+		i++;
+	}
+}
+
 int		main(int argc, char **argv)
 {
 	t_philo		*philo;
@@ -78,6 +102,7 @@ int		main(int argc, char **argv)
 	runtime->start_time = get_time();
 	philo = create_philos(runtime);
 	threads = create_threads(philo);
+	init_mutexes(philo);
 	i = 0;
 	while (i < philo->runtime->philo_number)
 	{
@@ -85,5 +110,6 @@ int		main(int argc, char **argv)
 			return (1);
 		i++;
 	}
+	destroy_mutexes(philo);
 	return (0);
 }
