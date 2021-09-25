@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 12:45:39 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/25 12:56:00 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/25 14:38:16 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,14 @@ void	take_forks(t_philo *philo)
 
 void	*dead_philo(void *arg)
 {
-	t_runtime *sim_info;
+	t_philo	*philo;
+	int		i;
 
-	sim_info = arg;
+	philo = arg;
+	i = 0;
 	while (1)
 	{
-		if (sim_info->philo_dead)
+		if (philo->sim_info->philo_dead)
 			exit(EXIT_SUCCESS);
 	}
 }
@@ -81,21 +83,21 @@ void	*routine(void *arg)
 	pthread_t	death;
 	philo = arg;
 	philo->time_of_last_meal = get_time();
-	pthread_create(&death, NULL, dead_philo, philo->sim_info);
+	pthread_create(&death, NULL, dead_philo, philo);
 	while (1)
 	{
+		take_forks(philo);
 		if ((get_time() - philo->time_of_last_meal) > philo->sim_info->time_to_die)
 		{
 			print_status(1, NULL, philo);
 			philo->sim_info->philo_dead = 1;
 			return (NULL);
 		}
-		take_forks(philo);
 		eating(philo);
-		sleeping(philo);
-		thinking(philo);
 		if (philo->meal_number == philo->sim_info->number_of_meals && philo->sim_info->number_of_meals != 0)
 			return (NULL);
+		sleeping(philo);
+		thinking(philo);
 	}
 	return (NULL);
 }
