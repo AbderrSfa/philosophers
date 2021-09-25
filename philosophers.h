@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:07 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/22 14:48:16 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/25 11:19:27 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,49 +26,53 @@
 
 typedef	struct		s_runtime
 {
+	pthread_t		*threads;
 	pthread_mutex_t	*forks;
-	int				philo_number;
+	pthread_mutex_t	*print;
+	int				number_of_philos;
 	unsigned int	time_to_die;
 	unsigned int	time_to_eat;
 	unsigned int	time_to_sleep;
-	int				times_eaten;
+	int				number_of_meals;
 	unsigned int	start_time;
 }					t_runtime;
 
 
 typedef struct		s_philo
 {
-	t_runtime		*runtime;
+	t_runtime		*sim_info;
 	int				philo_id;
-	int				meal_number;
-	unsigned int	time_of_last_meal;
 	int				left_hand;
 	int				right_hand;
+	int				meal_number;
+	unsigned int	time_of_last_meal;
 }					t_philo;
 
-/* Libft functions */
-void			ft_putchar_fd(char c, int fd);
-void			ft_putstr_fd(char *s, int fd);
-void			ft_putnbr_fd(int n, int fd);
-int				ft_isdigit(int c);
-int				ft_atoi(const char *str);
-
 /* Parsing inputs */
-t_runtime		*parsing(int argc, char **argv);
-int				is_arg_valid(char **argv);
-void			init_runtime(t_runtime *runtime);
-int				validate_args(t_runtime *runtime);
-int				ft_put_error(char *error);
+int					parsing(int argc, char **argv, t_runtime *runtime);
+int					is_arg_valid(char **argv);
+int					validate_args(t_runtime *runtime);
+
+/* Initializing philos & mutexes */
+t_philo				*create_philos(t_runtime *runtime);
+void				init_philo(t_runtime *runtime, t_philo *philo, int i);
+int					init_mutexes(t_runtime *runtime);
 
 /* Simultion */
-t_philo			*create_philos(t_runtime *runtime);
-void			initialize_philo(t_philo *philo, t_runtime *runtime, int i);
-pthread_t		*create_threads(t_philo *philo);
-unsigned int	get_time();
-void			*routine(void *arg);
-void			eating(t_philo *philo);
-void			sleeping(t_philo *philo);
-void			thinking(t_philo *philo);
-void			print_status(int dead, char *status, t_philo *philo);
+void				*routine(void *arg);
+void				take_forks(t_philo *philo);
+void				eating(t_philo *philo);
+void				sleeping(t_philo *philo);
+void				thinking(t_philo *philo);
+void				print_status(int dead, char *status, t_philo *philo);
+unsigned int		get_time();
+
+/* Libft functions */
+void				ft_putchar_fd(char c, int fd);
+void				ft_putstr_fd(char *s, int fd);
+void				ft_putnbr_fd(int n, int fd);
+int					ft_isdigit(int c);
+int					ft_atoi(const char *str);
+int					ft_put_error(char *error);
 
 #endif

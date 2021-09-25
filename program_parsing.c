@@ -6,11 +6,26 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 15:48:41 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/22 14:36:59 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/25 11:16:29 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int	validate_args(t_runtime *runtime)
+{
+	if (runtime->number_of_philos < 1)
+		return (ft_put_error("There has to be at least 1 philosopher."));
+	else if (runtime->number_of_philos > 200)
+		return (ft_put_error("Only enough chairs for 200 philosophers."));
+	else if (runtime->time_to_die < 60)
+		return (ft_put_error("Time to die cannot be under 60 ms."));
+	else if (runtime->time_to_eat < 60)
+		return (ft_put_error("Time to eat cannot be under 60 ms."));
+	else if (runtime->time_to_sleep < 60)
+		return (ft_put_error("Time to sleep cannot be under 60 ms."));
+	return (0);
+}
 
 int	is_arg_valid(char **argv)
 {
@@ -32,45 +47,18 @@ int	is_arg_valid(char **argv)
 	return (0);
 }
 
-void		init_runtime(t_runtime *runtime)
+int	parsing(int argc, char **argv, t_runtime *runtime)
 {
-	runtime->philo_number = 0;
-	runtime->time_to_die = 0;
-	runtime->time_to_eat = 0;
-	runtime->time_to_sleep = 0;
-	runtime->times_eaten = -1;
-}
-
-int	validate_args(t_runtime *runtime)
-{
-	if (runtime->philo_number < 1)
-		return (ft_put_error("There has to be at least 1 philosopher."));
-	else if (runtime->philo_number > 200)
-		return (ft_put_error("Only enough chairs for 200 philosophers."));
-	else if (runtime->time_to_die < 60)
-		return (ft_put_error("Time to die cannot be under 60 ms."));
-	else if (runtime->time_to_eat < 60)
-		return (ft_put_error("Time to eat cannot be under 60 ms."));
-	else if (runtime->time_to_sleep < 60)
-		return (ft_put_error("Time to sleep cannot be under 60 ms."));
-	return (0);
-}
-
-t_runtime	*parsing(int argc, char **argv)
-{
-	t_runtime	*runtime;
-
-	runtime = malloc(sizeof(t_runtime));
-	if (runtime == NULL || is_arg_valid(argv))
-		return (NULL);
-	init_runtime(runtime);
-	runtime->philo_number = ft_atoi(argv[1]);
+	if (is_arg_valid(argv))
+		return (1);
+	runtime->number_of_meals = -1;
+	runtime->number_of_philos = ft_atoi(argv[1]);
 	runtime->time_to_die = ft_atoi(argv[2]);
 	runtime->time_to_eat = ft_atoi(argv[3]);
 	runtime->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		runtime->times_eaten = ft_atoi(argv[5]);
+		runtime->number_of_meals = ft_atoi(argv[5]);
 	if (validate_args(runtime))
-		return (NULL);
-	return (runtime);
+		return (1);
+	return (0);
 }
