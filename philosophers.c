@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:09 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/25 11:15:15 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/25 11:49:57 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,19 @@ t_philo	*create_philos(t_runtime *runtime)
 	return (philo);
 }
 
+void	destroy_mutexes(t_runtime *runtime)
+{
+	int		i;
+
+	i = 0;
+	while (i < runtime->number_of_philos)
+	{
+		pthread_mutex_destroy(&runtime->forks[i]);
+		i++;
+	}
+	pthread_mutex_destroy(runtime->print);
+}
+
 int		main(int argc, char **argv)
 {
 	t_philo		*philo;
@@ -82,13 +95,14 @@ int		main(int argc, char **argv)
 		i++;
 	}
 	i = 0;
+	
 	while (i < runtime.number_of_philos)
 	{
 		if (pthread_join(runtime.threads[i], NULL))
 			return (ft_put_error("Allocation error."));
 		i++;
 	}
-
+	destroy_mutexes(&runtime);
 /* 	i = 0;
 	printf("\033[1;34mSimulation Info:\033[0m\n");
 	printf("number_philos: %d\ntime_to_die: %d\ntime_to_eat: %d\ntime_to_sleep: %d\nnumber_of_meals: %d\n", runtime.number_of_philos, runtime.time_to_die, runtime.time_to_eat, runtime.time_to_sleep, runtime.number_of_meals);

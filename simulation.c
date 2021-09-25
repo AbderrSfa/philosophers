@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 12:45:39 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/25 11:16:11 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/25 12:56:00 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,31 @@ void	take_forks(t_philo *philo)
 	printf("%u %d has taken a fork.\n", get_time() - philo->sim_info->start_time, philo->philo_id);	
 }
 
+void	*dead_philo(void *arg)
+{
+	t_runtime *sim_info;
+
+	sim_info = arg;
+	while (1)
+	{
+		if (sim_info->philo_dead)
+			exit(EXIT_SUCCESS);
+	}
+}
+
 void	*routine(void *arg)
 {
-	t_philo	*philo;
-
+	t_philo		*philo;
+	pthread_t	death;
 	philo = arg;
 	philo->time_of_last_meal = get_time();
+	pthread_create(&death, NULL, dead_philo, philo->sim_info);
 	while (1)
 	{
 		if ((get_time() - philo->time_of_last_meal) > philo->sim_info->time_to_die)
 		{
 			print_status(1, NULL, philo);
+			philo->sim_info->philo_dead = 1;
 			return (NULL);
 		}
 		take_forks(philo);

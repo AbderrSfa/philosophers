@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 15:48:41 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/25 11:16:29 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/25 12:38:27 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	parsing(int argc, char **argv, t_runtime *runtime)
 	runtime->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		runtime->number_of_meals = ft_atoi(argv[5]);
+	runtime->philo_dead = 0;
 	if (validate_args(runtime))
 		return (1);
 	return (0);
