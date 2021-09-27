@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:09 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/25 11:49:57 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/27 10:50:00 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_philo(t_runtime *runtime, t_philo *philo, int i)
 	philo[i].philo_id = i + 1;
 	philo[i].left_hand = i;
 	philo[i].right_hand = (i + 1) % runtime->number_of_philos;
-	philo[i].meal_number = 0;
+	philo[i].meals_eaten = 0;
 	philo[i].sim_info = runtime;
 	philo[i].time_of_last_meal = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:07 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/25 12:37:46 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/27 10:49:30 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef	struct		s_runtime
 	unsigned int	time_to_die;
 	unsigned int	time_to_eat;
 	unsigned int	time_to_sleep;
-	int				number_of_meals;
+	int				meals_to_eat;
 	unsigned int	start_time;
 	int				philo_dead;
 }					t_runtime;
@@ -45,7 +45,7 @@ typedef struct		s_philo
 	int				philo_id;
 	int				left_hand;
 	int				right_hand;
-	int				meal_number;
+	int				meals_eaten;
 	unsigned int	time_of_last_meal;
 }					t_philo;
 

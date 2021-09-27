@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 12:45:39 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/25 14:38:16 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/27 10:49:48 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	print_status(int dead, char *status, t_philo *philo)
 {
 	pthread_mutex_lock(philo->sim_info->print);
 	if (dead == 1)
-		printf("%u \033[0;31m%d died. last_meal: %d\n\033[0m", get_time() - philo->sim_info->start_time, philo->philo_id, (get_time() - philo->time_of_last_meal));
+		printf("%u \033[0;31m%d died. last_meal: %u\n\033[0m", get_time() - philo->sim_info->start_time, philo->philo_id, (get_time() - philo->time_of_last_meal));
 	else
-		printf("%u %d is %s.\n", get_time() - philo->sim_info->start_time, philo->philo_id, status);
+		printf("%u %d is %s. last_meal: %u\n", get_time() - philo->sim_info->start_time, philo->philo_id, status, (get_time() - philo->time_of_last_meal));
 	pthread_mutex_unlock(philo->sim_info->print);
 }
 
@@ -43,10 +43,10 @@ void	sleeping(t_philo *philo)
 
 void	eating(t_philo *philo)
 {
-	philo->meal_number++;
+	philo->meals_eaten++;
 	print_status(0, "eating", philo);
-	usleep(philo->sim_info->time_to_eat * 1000);
 	philo->time_of_last_meal = get_time();
+	usleep(philo->sim_info->time_to_eat * 1000);
 	if (pthread_mutex_unlock(&philo->sim_info->forks[philo->left_hand]))
 		exit(EXIT_FAILURE);
 	if (pthread_mutex_unlock(&philo->sim_info->forks[philo->right_hand]))
@@ -57,10 +57,10 @@ void	take_forks(t_philo *philo)
 {
 	if (pthread_mutex_lock(&philo->sim_info->forks[philo->left_hand]))
 		exit(EXIT_FAILURE);
-	printf("%u %d has taken a fork.\n", get_time() - philo->sim_info->start_time, philo->philo_id);	
+	printf("%u %d has taken a fork. last_meal %u\n", get_time() - philo->sim_info->start_time, philo->philo_id, (get_time() - philo->time_of_last_meal));	
 	if (pthread_mutex_lock(&philo->sim_info->forks[philo->right_hand]))
 		exit(EXIT_FAILURE);
-	printf("%u %d has taken a fork.\n", get_time() - philo->sim_info->start_time, philo->philo_id);	
+	printf("%u %d has taken a fork. last_meal %u\n", get_time() - philo->sim_info->start_time, philo->philo_id, (get_time() - philo->time_of_last_meal));	
 }
 
 void	*dead_philo(void *arg)
@@ -81,6 +81,7 @@ void	*routine(void *arg)
 {
 	t_philo		*philo;
 	pthread_t	death;
+
 	philo = arg;
 	philo->time_of_last_meal = get_time();
 	pthread_create(&death, NULL, dead_philo, philo);
@@ -94,7 +95,7 @@ void	*routine(void *arg)
 			return (NULL);
 		}
 		eating(philo);
-		if (philo->meal_number == philo->sim_info->number_of_meals && philo->sim_info->number_of_meals != 0)
+		if (philo->meals_eaten == philo->sim_info->meals_to_eat && philo->sim_info->meals_to_eat != 0)
 			return (NULL);
 		sleeping(philo);
 		thinking(philo);
