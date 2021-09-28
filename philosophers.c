@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:09 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/27 10:50:00 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/28 10:06:36 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		main(int argc, char **argv)
 {
 	t_philo		*philo;
 	t_runtime	runtime;
+	pthread_mutex_t kill;
 	int			i;
 
 	if (argc < 5 || argc > 6)
@@ -86,22 +87,24 @@ int		main(int argc, char **argv)
 	if (init_mutexes(&runtime))
 		return (ft_put_error("Allocation error."));
 	i = 0;
+	pthread_mutex_init(&kill, NULL);
+	pthread_mutex_lock(&kill);
 	while (i < runtime.number_of_philos)
 	{
 		if (pthread_create(&runtime.threads[i], NULL, routine, &philo[i]))
 			return (ft_put_error("Allocation error."));
-		printf("%u \033[0;32m%d is born.\n\033[0m", get_time() - runtime.start_time, philo[i].philo_id);
+		pthread_detach(runtime.threads[i]);
 		usleep(1000);
 		i++;
 	}
 	i = 0;
-	
-	while (i < runtime.number_of_philos)
+	pthread_mutex_lock(&kill);	
+/* 	while (i < runtime.number_of_philos)
 	{
 		if (pthread_join(runtime.threads[i], NULL))
 			return (ft_put_error("Allocation error."));
 		i++;
-	}
+	} */
 	destroy_mutexes(&runtime);
 /* 	i = 0;
 	printf("\033[1;34mSimulation Info:\033[0m\n");

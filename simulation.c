@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 12:45:39 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/27 10:49:48 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/09/28 10:08:01 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,12 @@ void	*dead_philo(void *arg)
 	i = 0;
 	while (1)
 	{
-		if (philo->sim_info->philo_dead)
+		//if (philo->sim_info->philo_dead)
+		if ((get_time() - philo->time_of_last_meal) > philo->sim_info->time_to_die)
+		{
+			print_status(1, NULL, philo);
 			exit(EXIT_SUCCESS);
+		}
 	}
 }
 
@@ -88,12 +92,12 @@ void	*routine(void *arg)
 	while (1)
 	{
 		take_forks(philo);
-		if ((get_time() - philo->time_of_last_meal) > philo->sim_info->time_to_die)
+/* 		if ((get_time() - philo->time_of_last_meal) > philo->sim_info->time_to_die)
 		{
 			print_status(1, NULL, philo);
 			philo->sim_info->philo_dead = 1;
 			return (NULL);
-		}
+		} */
 		eating(philo);
 		if (philo->meals_eaten == philo->sim_info->meals_to_eat && philo->sim_info->meals_to_eat != 0)
 			return (NULL);
