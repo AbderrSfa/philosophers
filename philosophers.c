@@ -12,7 +12,7 @@
 
 #include "philosophers.h"
 
-int	init_mutexes(t_runtime *runtime)
+static int	init_mutexes(t_runtime *runtime)
 {
 	int		i;
 
@@ -28,7 +28,7 @@ int	init_mutexes(t_runtime *runtime)
 	return (0);
 }
 
-void	init_philo(t_runtime *runtime, t_philo *philo, int i)
+static void	init_philo(t_runtime *runtime, t_philo *philo, int i)
 {
 	philo[i].philo_id = i + 1;
 	philo[i].left_hand = i;
@@ -38,7 +38,7 @@ void	init_philo(t_runtime *runtime, t_philo *philo, int i)
 	philo[i].time_of_last_meal = 0;
 }
 
-t_philo	*create_philos(t_runtime *runtime)
+static t_philo	*create_philos(t_runtime *runtime)
 {
 	t_philo	*philo;
 	int		i;
@@ -58,7 +58,7 @@ t_philo	*create_philos(t_runtime *runtime)
 	return (philo);
 }
 
-void	destroy_mutexes(t_runtime *runtime)
+static void	destroy_mutexes(t_runtime *runtime)
 {
 	int		i;
 

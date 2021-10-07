@@ -12,7 +12,7 @@
 
 #include "philosophers.h"
 
-int	validate_args(t_runtime *runtime)
+static int	validate_args(t_runtime *runtime)
 {
 	if (runtime->number_of_philos < 1)
 		return (ft_put_error("There has to be at least 1 philosopher."));
@@ -27,7 +27,7 @@ int	validate_args(t_runtime *runtime)
 	return (0);
 }
 
-int	is_arg_valid(char **argv)
+static int	is_arg_valid(char **argv)
 {
 	int		i;
 	int		j;

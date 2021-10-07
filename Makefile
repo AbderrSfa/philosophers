@@ -2,7 +2,8 @@ NAME = philo
 
 LIBNAME = philo.a
 
-SRC = libft_functions.c \
+SRC = actions.c \
+	libft_functions.c \
 	philosophers.c \
 	program_parsing.c \
 	simulation.c

@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 13:22:07 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/27 10:49:30 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/07 14:27:29 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,6 @@ typedef struct		s_philo
 
 /* Parsing inputs */
 int					parsing(int argc, char **argv, t_runtime *runtime);
-int					is_arg_valid(char **argv);
-int					validate_args(t_runtime *runtime);
-
-/* Initialize/free philos & mutexes */
-t_philo				*create_philos(t_runtime *runtime);
-void				init_philo(t_runtime *runtime, t_philo *philo, int i);
-int					init_mutexes(t_runtime *runtime);
-void				destroy_mutexes(t_runtime *runtime);
 
 /* Simultion */
 void				*routine(void *arg);
