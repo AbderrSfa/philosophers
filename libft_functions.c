@@ -5,18 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/17 14:58:47 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/25 11:19:20 by asfaihi          ###   ########.fr       */
+/*   Created: 2021/10/11 13:47:10 by asfaihi           #+#    #+#             */
+/*   Updated: 2021/10/11 14:54:48 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-int	ft_put_error(char *error)
-{
-	printf("ERROR:\033[0;33m %s\n\033[0m", error);
-	return (1);
-}
 
 void	ft_putchar_fd(char c, int fd)
 {

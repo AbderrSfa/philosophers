@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   program_parsing.c                                  :+:      :+:    :+:   */
+/*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/17 15:48:41 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/09/27 10:50:12 by asfaihi          ###   ########.fr       */
+/*   Created: 2021/10/11 13:48:00 by asfaihi           #+#    #+#             */
+/*   Updated: 2021/10/11 14:54:54 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static int	validate_args(t_runtime *runtime)
+int	ft_put_error(char *error)
+{
+	printf("ERROR:\033[0;33m %s\n\033[0m", error);
+	return (1);
+}
+
+unsigned int	ft_get_time(void)
+{
+	struct timeval	time_start;
+
+	gettimeofday(&time_start, NULL);
+	return ((time_start.tv_sec * 1000) + (time_start.tv_usec / 1000));
+}
+
+static int	ft_validate_args(t_runtime *runtime)
 {
 	if (runtime->number_of_philos < 1)
 		return (ft_put_error("There has to be at least 1 philosopher."));
@@ -27,7 +41,7 @@ static int	validate_args(t_runtime *runtime)
 	return (0);
 }
 
-static int	is_arg_valid(char **argv)
+static int	ft_is_arg_valid(char **argv)
 {
 	int		i;
 	int		j;
@@ -39,7 +53,7 @@ static int	is_arg_valid(char **argv)
 		while (argv[i][j])
 		{		
 			if (!ft_isdigit(argv[i][j]))
-				return (ft_put_error("Invalid argument."));
+				return (1);
 			j++;
 		}
 		i++;
@@ -47,19 +61,26 @@ static int	is_arg_valid(char **argv)
 	return (0);
 }
 
-int	parsing(int argc, char **argv, t_runtime *runtime)
+int	ft_parsing(int argc, char **argv, t_runtime *runtime)
 {
-	if (is_arg_valid(argv))
-		return (1);
-	runtime->meals_to_eat = -1;
+	if (ft_is_arg_valid(argv))
+		return (ft_put_error("Invalid argument."));
 	runtime->number_of_philos = ft_atoi(argv[1]);
 	runtime->time_to_die = ft_atoi(argv[2]);
 	runtime->time_to_eat = ft_atoi(argv[3]);
 	runtime->time_to_sleep = ft_atoi(argv[4]);
+	runtime->meals_to_eat = -1;
 	if (argc == 6)
 		runtime->meals_to_eat = ft_atoi(argv[5]);
 	runtime->philo_dead = 0;
-	if (validate_args(runtime))
+	if (ft_validate_args(runtime))
 		return (1);
+	runtime->threads = malloc(sizeof(pthread_t) * runtime->number_of_philos);
+	runtime->forks = malloc(sizeof(pthread_mutex_t)
+			* runtime->number_of_philos);
+	runtime->end = malloc(sizeof(pthread_mutex_t));
+	runtime->start_time = ft_get_time();
+	if (ft_init_mutexes(runtime))
+		return (ft_put_error("Allocation error."));
 	return (0);
 }

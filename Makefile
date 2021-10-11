@@ -2,11 +2,12 @@ NAME = philo
 
 LIBNAME = philo.a
 
-SRC = actions.c \
-	libft_functions.c \
-	philosophers.c \
-	program_parsing.c \
-	simulation.c
+SRC = ft_actions.c \
+	ft_init.c \
+	ft_parsing.c \
+	ft_philosophers.c \
+	ft_simulation.c \
+	libft_functions.c
 
 HEADERFILE = philosophers.h
 
@@ -25,7 +26,7 @@ RESET = \033[0m
 
 OBJECT = $(SRC:.c=.o)
 
-all: credit $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJECT)
 	@ar rcs $(LIBNAME) $(OBJECT)
@@ -45,16 +46,6 @@ fclean: clean
 	@/bin/rm -f $(NAME)
 
 re: fclean all
-
-
-
- 
- 
-  
-   
-   
-  
- 
 
 credit:
 	@echo "$(GREEN)"
@@ -83,24 +74,3 @@ credit:
 	@echo "█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████"
 	@echo "$(RESET)"
 	@echo "\n$(BLUE)███████████████████████████████████████████████ philo ███████████████████████████████████████████████$(RESET)"
-
- 
- 
- 
-
-
-
-
-#credit:
-#	@echo "$(GREEN)"
-#	@echo '█████████████████████████████████████████'
-#	@echo '  __'
-#	@echo ' (`/\'
-#	@echo ' `=\/\ __...--~~~~~-._   _.-~~~~~--...__'
-#	@echo '  `=\/\               \ /               \\'
-#	@echo '   `=\/                V                 \\'
-#	@echo '   //_\___--~~~~~~-._  |  _.-~~~~~~--...__\\'
-#	@echo '  //  ) (..----~~~~._\ | /_.~~~~----.....__\\'
-#	@echo ' ===( INK )==========\\|//===================='
-#	@echo '     \___/           `---`'
-#	@echo '█████████████████████████████████████████'
