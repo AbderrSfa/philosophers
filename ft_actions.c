@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:58 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/11 14:45:16 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/11 16:27:53 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_eating(t_philo *philo)
 void	ft_take_forks(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->sim_info->forks[philo->left_hand]);
-	pthread_mutex_lock(&philo->sim_info->forks[philo->right_hand]);
-	printf("%u %d has taken his forks.\n",
+	printf("%u %d has taken a fork.\n",
 		ft_get_time() - philo->sim_info->start_time, philo->philo_id);
+	pthread_mutex_lock(&philo->sim_info->forks[philo->right_hand]);
 }
