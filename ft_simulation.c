@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:34 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/11 14:54:17 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/12 11:52:07 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ static void	*ft_dead_philo(void *arg)
 	{
 		if (philo->next_meal_time < ft_get_time())
 		{
-			printf("%u %d died. previous meal: %u\n",
-				ft_get_time() - philo->sim_info->start_time, philo->philo_id,
-				(ft_get_time() - philo->prev_meal_time));
+			ft_print_status(1, NULL, philo);
+			printf("\033[0;31m****\n\033[0m");
 			pthread_mutex_unlock(philo->sim_info->end);
 		}
 	}
@@ -53,7 +52,7 @@ void	*ft_routine(void *arg)
 			break ;
 		}
 		ft_sleeping(philo);
-		ft_print_status("thinking", philo);
+		ft_print_status(0, "thinking", philo);
 	}
 	return (NULL);
 }

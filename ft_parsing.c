@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:00 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/11 14:54:54 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/12 11:40:08 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	ft_parsing(int argc, char **argv, t_runtime *runtime)
 	runtime->forks = malloc(sizeof(pthread_mutex_t)
 			* runtime->number_of_philos);
 	runtime->end = malloc(sizeof(pthread_mutex_t));
+	runtime->print = malloc(sizeof(pthread_mutex_t));
 	runtime->start_time = ft_get_time();
 	if (ft_init_mutexes(runtime))
 		return (ft_put_error("Allocation error."));

@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:46:23 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/11 15:11:32 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/12 11:46:10 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_runtime
 {
 	pthread_t		*threads;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	*end;
+	pthread_mutex_t	*print;
 	int				number_of_philos;
 	unsigned int	time_to_die;
 	unsigned int	time_to_eat;
@@ -35,7 +37,6 @@ typedef struct s_runtime
 	int				meals_to_eat;
 	unsigned int	start_time;
 	int				philo_dead;
-	pthread_mutex_t	*end;
 }					t_runtime;
 
 typedef struct s_philo
@@ -64,7 +65,7 @@ void				ft_take_forks(t_philo *philo);
 void				ft_eating(t_philo *philo);
 void				ft_sleeping(t_philo *philo);
 unsigned int		ft_get_time(void);
-void				ft_print_status(char *status, t_philo *philo);
+void				ft_print_status(int death, char *status, t_philo *philo);
 
 /* Libft functions */
 void				ft_putchar_fd(char c, int fd);

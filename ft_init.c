@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:50:47 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/11 14:46:32 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/12 11:40:56 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_destroy_mutexes(t_runtime *runtime)
 		i++;
 	}
 	pthread_mutex_destroy(runtime->end);
+	pthread_mutex_destroy(runtime->print);
 }
 
 int	ft_init_mutexes(t_runtime *runtime)
@@ -48,6 +49,8 @@ int	ft_init_mutexes(t_runtime *runtime)
 		i++;
 	}
 	if (pthread_mutex_init(runtime->end, NULL))
+		return (1);
+	if (pthread_mutex_init(runtime->print, NULL))
 		return (1);
 	return (0);
 }
