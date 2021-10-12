@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:46:23 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/12 11:46:10 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/12 16:25:59 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void				ft_take_forks(t_philo *philo);
 void				ft_eating(t_philo *philo);
 void				ft_sleeping(t_philo *philo);
 unsigned int		ft_get_time(void);
-void				ft_print_status(int death, char *status, t_philo *philo);
+void				init_times(t_philo *philo);
+void				ft_print_status(char *status, t_philo *philo);
 
 /* Libft functions */
 void				ft_putchar_fd(char c, int fd);

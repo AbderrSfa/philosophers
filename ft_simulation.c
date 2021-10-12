@@ -6,11 +6,26 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:34 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/12 11:52:07 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/12 16:25:45 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+unsigned int	ft_get_time(void)
+{
+	struct timeval	time_start;
+
+	gettimeofday(&time_start, NULL);
+	return ((time_start.tv_sec * 1000) + (time_start.tv_usec / 1000));
+}
+
+void	init_times(t_philo *philo)
+{
+	philo->prev_meal_time = ft_get_time();
+	philo->next_meal_time = ft_get_time()
+		+ (unsigned int)philo->sim_info->time_to_die;
+}
 
 static void	*ft_dead_philo(void *arg)
 {
@@ -21,8 +36,10 @@ static void	*ft_dead_philo(void *arg)
 	{
 		if (philo->next_meal_time < ft_get_time())
 		{
-			ft_print_status(1, NULL, philo);
-			printf("\033[0;31m****\n\033[0m");
+			pthread_mutex_lock(philo->sim_info->print);
+			printf("%u %d died. previous meal: %u\n",
+				ft_get_time() - philo->sim_info->start_time, philo->philo_id,
+				(ft_get_time() - philo->prev_meal_time));
 			pthread_mutex_unlock(philo->sim_info->end);
 		}
 	}
@@ -35,9 +52,7 @@ void	*ft_routine(void *arg)
 	pthread_t	death;
 
 	philo = arg;
-	philo->prev_meal_time = ft_get_time();
-	philo->next_meal_time = ft_get_time()
-		+ (unsigned int)philo->sim_info->time_to_die;
+	init_times(philo);
 	pthread_create(&death, NULL, ft_dead_philo, philo);
 	pthread_detach(death);
 	while (1)
@@ -52,7 +67,7 @@ void	*ft_routine(void *arg)
 			break ;
 		}
 		ft_sleeping(philo);
-		ft_print_status(0, "thinking", philo);
+		ft_print_status("thinking", philo);
 	}
 	return (NULL);
 }

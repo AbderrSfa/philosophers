@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:00 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/12 11:40:08 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/12 16:25:38 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,6 @@ int	ft_put_error(char *error)
 {
 	printf("ERROR:\033[0;33m %s\n\033[0m", error);
 	return (1);
-}
-
-unsigned int	ft_get_time(void)
-{
-	struct timeval	time_start;
-
-	gettimeofday(&time_start, NULL);
-	return ((time_start.tv_sec * 1000) + (time_start.tv_usec / 1000));
 }
 
 static int	ft_validate_args(t_runtime *runtime)
