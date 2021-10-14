@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:46:26 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/11 14:51:20 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/14 12:13:35 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int	main(int argc, char **argv)
 	t_runtime	runtime;
 
 	if (argc < 5 || argc > 6)
-		return (ft_put_error("Invalid number of arguments."));
+		return (ft_put_error(&runtime, "Invalid number of arguments."));
 	if (ft_parsing(argc, argv, &runtime))
 		return (1);
 	philo = ft_create_philos(&runtime);
 	if (ft_set_the_table(runtime, philo))
-		ft_put_error("Allocation error.");
-	ft_destroy_mutexes(&runtime);
+		ft_put_error(&runtime, "Allocation error.");
+	ft_destroy_mutexes(philo, &runtime);
 	return (0);
 }

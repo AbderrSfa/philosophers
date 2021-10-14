@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:50:47 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/12 11:40:56 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/14 11:54:02 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ft_init_philo(t_runtime *runtime, t_philo *philo, int i)
 	philo[i].prev_meal_time = 0;
 }
 
-void	ft_destroy_mutexes(t_runtime *runtime)
+void	ft_destroy_mutexes(t_philo *philo, t_runtime *runtime)
 {
 	int		i;
 
@@ -33,8 +33,13 @@ void	ft_destroy_mutexes(t_runtime *runtime)
 		pthread_mutex_destroy(&runtime->forks[i]);
 		i++;
 	}
+	free(philo);
 	pthread_mutex_destroy(runtime->end);
 	pthread_mutex_destroy(runtime->print);
+	free(runtime->forks);
+	free(runtime->threads);
+	free(runtime->end);
+	free(runtime->print);
 }
 
 int	ft_init_mutexes(t_runtime *runtime)

@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:46:23 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/12 16:25:59 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/14 12:13:14 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ typedef struct s_philo
 
 /* Parsing inputs */
 int					ft_parsing(int argc, char **argv, t_runtime *runtime);
-int					ft_put_error(char *error);
+int					ft_put_error(t_runtime *runtime, char *error);
 
 /* Init / destroy philosophers */
 t_philo				*ft_create_philos(t_runtime *runtime);
 int					ft_init_mutexes(t_runtime *runtime);
-void				ft_destroy_mutexes(t_runtime *runtime);
+void				ft_destroy_mutexes(t_philo *philo, t_runtime *runtime);
 
 /* Simultion */
 void				*ft_routine(void *arg);
