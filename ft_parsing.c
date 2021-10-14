@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:00 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/14 12:14:26 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/14 16:00:27 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	ft_parsing(int argc, char **argv, t_runtime *runtime)
 	runtime->time_to_die = ft_atoi(argv[2]);
 	runtime->time_to_eat = ft_atoi(argv[3]);
 	runtime->time_to_sleep = ft_atoi(argv[4]);
-	runtime->meals_to_eat = -1;
+	runtime->meals_to_eat = 0;
 	if (argc == 6)
 		runtime->meals_to_eat = ft_atoi(argv[5]);
 	runtime->philo_dead = 0;

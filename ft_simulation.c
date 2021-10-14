@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:34 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/14 11:35:57 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/14 16:00:44 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	*ft_routine(void *arg)
 		ft_take_forks(philo);
 		ft_eating(philo);
 		if (philo->meals_eaten >= philo->sim_info->meals_to_eat
-			&& philo->sim_info->meals_to_eat != -1)
+			&& philo->sim_info->meals_to_eat != 0)
 		{
 			printf("%u %d done eating.\n",
 				ft_get_time() - philo->sim_info->start_time, philo->philo_id);
