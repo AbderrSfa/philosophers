@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:34 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/15 11:46:28 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/15 11:49:46 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	*ft_dead_philo(void *arg)
 	while (1)
 	{
 		if (philo->sim_info->philo_dead)
-			break;
+			break ;
 		if (philo->next_meal_time < ft_get_time())
 		{
 			pthread_mutex_lock(philo->sim_info->print);
@@ -63,7 +63,7 @@ void	*ft_routine(void *arg)
 		ft_take_forks(philo);
 		ft_eating(philo);
 		if (philo->meals_eaten >= philo->sim_info->meals_to_eat
-		&& philo->sim_info->meals_to_eat != 0)
+			&& philo->sim_info->meals_to_eat != 0)
 		{
 			philo->sim_info->philo_dead = 1;
 			pthread_mutex_lock(philo->sim_info->print);

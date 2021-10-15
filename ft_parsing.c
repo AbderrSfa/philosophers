@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:00 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/15 11:39:03 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/15 11:47:31 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ int	ft_put_error(t_runtime *runtime, char *error)
 static int	ft_validate_args(t_runtime *runtime)
 {
 	if (runtime->number_of_philos < 1)
-		return (ft_put_error(runtime, "There has to be at least 1 philosopher."));
+		return (ft_put_error(runtime,
+				"There has to be at least 1 philosopher."));
 	else if (runtime->number_of_philos > 200)
-		return (ft_put_error(runtime, "Only enough chairs for 200 philosophers."));
+		return (ft_put_error(runtime,
+				"Only enough chairs for 200 philosophers."));
 	else if (runtime->time_to_die < 60)
 		return (ft_put_error(runtime, "Time to die cannot be under 60 ms."));
 	else if (runtime->time_to_eat < 60)

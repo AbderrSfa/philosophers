@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:46:26 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/15 11:38:00 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/15 11:48:50 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ int	philo_even_number(t_runtime runtime, t_philo *philo)
 
 static int	ft_set_the_table(t_runtime runtime, t_philo *philo)
 {
+	int		i;
+
+	i = 0;
 	pthread_mutex_lock(runtime.end);
-	int i = 0;
 	while (i < runtime.number_of_philos)
 	{
 		if (pthread_create(&runtime.threads[i], NULL, ft_routine, &philo[i]))
