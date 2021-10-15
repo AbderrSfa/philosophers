@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:00 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/15 11:47:31 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/15 14:41:32 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	ft_put_error(t_runtime *runtime, char *error)
 		free(runtime->end);
 	if (runtime->print)
 		free(runtime->print);
+	if (runtime->done)
+		free(runtime->done);
 }
 
 static int	ft_validate_args(t_runtime *runtime)
@@ -83,6 +85,7 @@ int	ft_parsing(int argc, char **argv, t_runtime *runtime)
 			* runtime->number_of_philos);
 	runtime->end = malloc(sizeof(pthread_mutex_t));
 	runtime->print = malloc(sizeof(pthread_mutex_t));
+	runtime->done = malloc(sizeof(pthread_mutex_t));
 	runtime->start_time = ft_get_time();
 	if (ft_init_mutexes(runtime))
 		return (ft_put_error(runtime, "Allocation error."));

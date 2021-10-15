@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:58 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/15 11:37:38 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/15 14:48:05 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ void	ft_sleeping(t_philo *philo)
 
 void	ft_eating(t_philo *philo)
 {
+	pthread_mutex_lock(philo->eat);
 	philo->meals_eaten++;
 	ft_print_status("eating", philo);
 	init_times(philo);
 	usleep(philo->sim_info->time_to_eat * 1000);
 	pthread_mutex_unlock(&philo->sim_info->forks[philo->left_hand]);
 	pthread_mutex_unlock(&philo->sim_info->forks[philo->right_hand]);
+	pthread_mutex_unlock(philo->eat);
 }
 
 void	ft_take_forks(t_philo *philo)

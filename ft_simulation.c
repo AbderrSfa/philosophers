@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:34 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/15 11:49:46 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/15 14:47:29 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ static void	*ft_dead_philo(void *arg)
 			break ;
 		if (philo->next_meal_time < ft_get_time())
 		{
+			pthread_mutex_lock(philo->eat);
 			pthread_mutex_lock(philo->sim_info->print);
-			philo->sim_info->philo_dead = 1;
 			printf("[%u]\t%d died.\n",
 				ft_get_time() - philo->sim_info->start_time, philo->philo_id);
 			pthread_mutex_unlock(philo->sim_info->end);
 		}
-		usleep(500);
+		usleep(1000);
 	}
 	return (NULL);
 }
@@ -66,9 +66,9 @@ void	*ft_routine(void *arg)
 			&& philo->sim_info->meals_to_eat != 0)
 		{
 			philo->sim_info->philo_dead = 1;
-			pthread_mutex_lock(philo->sim_info->print);
+			pthread_mutex_lock(philo->sim_info->done);
 			philo->sim_info->finished_philos++;
-			pthread_mutex_unlock(philo->sim_info->print);
+			pthread_mutex_unlock(philo->sim_info->done);
 			break ;
 		}
 		ft_sleeping(philo);

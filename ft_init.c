@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:50:47 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/15 11:38:19 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/15 14:47:00 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void	ft_init_philo(t_runtime *runtime, t_philo *philo, int i)
 	philo[i].meals_eaten = 0;
 	philo[i].next_meal_time = 0;
 	philo[i].prev_meal_time = 0;
+	philo[i].eat = malloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(philo[i].eat, NULL);
 }
 
 void	ft_destroy_mutexes(t_philo *philo, t_runtime *runtime)
@@ -40,6 +42,7 @@ void	ft_destroy_mutexes(t_philo *philo, t_runtime *runtime)
 	free(runtime->threads);
 	free(runtime->end);
 	free(runtime->print);
+	free(runtime->done);
 }
 
 int	ft_init_mutexes(t_runtime *runtime)
@@ -56,6 +59,8 @@ int	ft_init_mutexes(t_runtime *runtime)
 	if (pthread_mutex_init(runtime->end, NULL))
 		return (1);
 	if (pthread_mutex_init(runtime->print, NULL))
+		return (1);
+	if (pthread_mutex_init(runtime->done, NULL))
 		return (1);
 	return (0);
 }
