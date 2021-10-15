@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:50:47 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/14 11:54:02 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/15 11:38:19 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	ft_destroy_mutexes(t_philo *philo, t_runtime *runtime)
 		pthread_mutex_destroy(&runtime->forks[i]);
 		i++;
 	}
-	free(philo);
 	pthread_mutex_destroy(runtime->end);
 	pthread_mutex_destroy(runtime->print);
+	free(philo);
 	free(runtime->forks);
 	free(runtime->threads);
 	free(runtime->end);

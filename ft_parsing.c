@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:00 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/14 16:00:27 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/15 11:39:03 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	ft_parsing(int argc, char **argv, t_runtime *runtime)
 	if (argc == 6)
 		runtime->meals_to_eat = ft_atoi(argv[5]);
 	runtime->philo_dead = 0;
+	runtime->finished_philos = 0;
 	if (ft_validate_args(runtime))
 		return (1);
 	runtime->threads = malloc(sizeof(pthread_t) * runtime->number_of_philos);

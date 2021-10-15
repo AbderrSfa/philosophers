@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:46:23 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/14 12:13:14 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/15 11:37:55 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_runtime
 	int				meals_to_eat;
 	unsigned int	start_time;
 	int				philo_dead;
+	int				finished_philos;
 }					t_runtime;
 
 typedef struct s_philo
