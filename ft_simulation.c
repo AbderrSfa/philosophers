@@ -6,11 +6,19 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:34 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/15 14:47:29 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/15 18:50:14 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+void	ft_print_status(char *status, t_philo *philo)
+{
+	pthread_mutex_lock(philo->sim_info->print);
+	printf("[%u]\t%d is %s.\n",
+		(ft_get_time() - philo->sim_info->start_time), philo->philo_id, status);
+	pthread_mutex_unlock(philo->sim_info->print);
+}
 
 unsigned int	ft_get_time(void)
 {
@@ -60,8 +68,7 @@ void	*ft_routine(void *arg)
 	pthread_detach(death);
 	while (1)
 	{
-		ft_take_forks(philo);
-		ft_eating(philo);
+		take_fork_and_eat(philo);
 		if (philo->meals_eaten >= philo->sim_info->meals_to_eat
 			&& philo->sim_info->meals_to_eat != 0)
 		{
@@ -71,8 +78,7 @@ void	*ft_routine(void *arg)
 			pthread_mutex_unlock(philo->sim_info->done);
 			break ;
 		}
-		ft_sleeping(philo);
-		ft_print_status("thinking", philo);
+		sleep_and_think(philo);
 	}
 	if (philo->sim_info->finished_philos == philo->sim_info->number_of_philos)
 		pthread_mutex_unlock(philo->sim_info->end);

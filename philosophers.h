@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:46:23 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/15 14:45:31 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/15 18:50:35 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void				ft_destroy_mutexes(t_philo *philo, t_runtime *runtime);
 
 /* Simultion */
 void				*ft_routine(void *arg);
+void				take_fork_and_eat(t_philo *philo);
+void				sleep_and_think(t_philo *philo);
 void				ft_take_forks(t_philo *philo);
 void				ft_eating(t_philo *philo);
 void				ft_sleeping(t_philo *philo);
