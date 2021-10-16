@@ -33,6 +33,8 @@ void	ft_destroy_mutexes(t_philo *philo, t_runtime *runtime)
 	while (i < runtime->number_of_philos)
 	{
 		pthread_mutex_destroy(&runtime->forks[i]);
+		pthread_mutex_destroy(philo[i].eat);
+		free(philo[i].eat);
 		i++;
 	}
 	pthread_mutex_destroy(runtime->end);
