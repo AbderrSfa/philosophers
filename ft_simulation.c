@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:34 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/17 11:52:08 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/17 11:59:15 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	*ft_dead_philo(void *arg)
 				ft_get_time() - philo->sim_info->start_time, philo->philo_id);
 			pthread_mutex_unlock(philo->sim_info->end);
 		}
-		usleep(250);
+		usleep(500);
 	}
 	return (NULL);
 }
