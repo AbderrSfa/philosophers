@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:46:23 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/15 18:50:35 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/17 11:09:48 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_philo
 	int				right_hand;
 	int				meals_eaten;
 	unsigned int	next_meal_time;
-	unsigned int	prev_meal_time;
 }					t_philo;
 
 /* Parsing inputs */
@@ -70,7 +69,6 @@ void				ft_take_forks(t_philo *philo);
 void				ft_eating(t_philo *philo);
 void				ft_sleeping(t_philo *philo);
 unsigned int		ft_get_time(void);
-void				init_times(t_philo *philo);
 void				ft_print_status(char *status, t_philo *philo);
 
 /* Libft functions */

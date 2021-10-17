@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:34 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/15 18:50:14 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/17 11:52:08 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,6 @@ unsigned int	ft_get_time(void)
 	return ((time_start.tv_sec * 1000) + (time_start.tv_usec / 1000));
 }
 
-void	init_times(t_philo *philo)
-{
-	philo->prev_meal_time = ft_get_time();
-	philo->next_meal_time = ft_get_time()
-		+ (unsigned int)philo->sim_info->time_to_die;
-}
-
 static void	*ft_dead_philo(void *arg)
 {
 	t_philo	*philo;
@@ -52,7 +45,7 @@ static void	*ft_dead_philo(void *arg)
 				ft_get_time() - philo->sim_info->start_time, philo->philo_id);
 			pthread_mutex_unlock(philo->sim_info->end);
 		}
-		usleep(1000);
+		usleep(250);
 	}
 	return (NULL);
 }
@@ -63,7 +56,8 @@ void	*ft_routine(void *arg)
 	pthread_t	death;
 
 	philo = arg;
-	init_times(philo);
+	philo->next_meal_time = ft_get_time()
+		+ (unsigned int)philo->sim_info->time_to_die;
 	pthread_create(&death, NULL, ft_dead_philo, philo);
 	pthread_detach(death);
 	while (1)
