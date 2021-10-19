@@ -6,7 +6,7 @@
 /*   By: asfaihi <asfaihi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 13:48:34 by asfaihi           #+#    #+#             */
-/*   Updated: 2021/10/17 11:59:15 by asfaihi          ###   ########.fr       */
+/*   Updated: 2021/10/19 10:50:29 by asfaihi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static void	*ft_dead_philo(void *arg)
 	philo = arg;
 	while (1)
 	{
-		if (philo->sim_info->philo_dead)
-			break ;
 		if (philo->next_meal_time < ft_get_time())
 		{
 			pthread_mutex_lock(philo->eat);
@@ -66,15 +64,17 @@ void	*ft_routine(void *arg)
 		if (philo->meals_eaten >= philo->sim_info->meals_to_eat
 			&& philo->sim_info->meals_to_eat != 0)
 		{
-			philo->sim_info->philo_dead = 1;
 			pthread_mutex_lock(philo->sim_info->done);
 			philo->sim_info->finished_philos++;
 			pthread_mutex_unlock(philo->sim_info->done);
-			break ;
+		}
+		if (philo->sim_info->finished_philos == philo->sim_info->number_of_philos)
+		{
+			pthread_mutex_lock(philo->sim_info->print);
+			pthread_mutex_unlock(philo->sim_info->end);
 		}
 		sleep_and_think(philo);
 	}
-	if (philo->sim_info->finished_philos == philo->sim_info->number_of_philos)
-		pthread_mutex_unlock(philo->sim_info->end);
+
 	return (NULL);
 }
